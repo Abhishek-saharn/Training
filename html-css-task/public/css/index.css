@@ -1,0 +1,95 @@
+body {
+    margin: 0;
+}
+hr {
+  margin: -1px;
+}
+header{
+  padding:5px;
+  background-color: #FFA445;
+  width: 100%;
+
+}
+header div{
+  width: 50%;
+  margin: 0 auto;
+}
+.b-head{
+  margin-bottom:5px;
+  color: #0953C9;
+  background-color: #C1D2EC;
+}
+.wrapper{
+  width: 100%;
+  overflow: hidden;
+}
+#left{
+  width: 15%;
+  float: left;
+  border-style: solid;
+  border-width: 2px;
+  padding: 10px;
+  color: #768AB3;
+}
+#right{
+  margin-left: 18%;
+  padding:15px;
+}
+.wrapper>div{
+  width: 24%;
+  float: left;
+}
+.l-img{
+  margin-top: 10px;
+  width: 180px;
+  box-shadow: 0px 0px 10px #888888;
+}
+.tiles{
+  padding: 1px;
+}
+.ftable{
+    margin-top: 20px;
+    table-layout: fixed;
+    width: 100%;
+}
+.f-col{
+  width: 50%;
+}
+a{
+  text-decoration: none;
+}
+
+th,td{
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0px 10px 0px;
+}
+.reg-head{
+  height: 25px;
+  text-align: center;
+  background-color: grey;
+}
+.reg-form{
+  width: 100%;
+  background-color: #ddd;
+
+}
+.reg-form table{
+  padding-top: 10px;
+  width: 25%;
+  margin: 0 auto;
+}
+.language{
+    margin-top: 10px;
+    width: 65%;
+    background-color: #fff;
+}
+.small{
+  font-size: 10px;
+}
+footer{
+  color: #768AB3;
+  width: 50%;
+  text-align: center;
+  margin: 0 auto;
+}
