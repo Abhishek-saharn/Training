@@ -1,10 +1,9 @@
 <html>
         <head>
-            <script src="index.js"></script>
+            <script src="q6.js"></script>
         </head>
         <body>
-            <input id="phone" type="text" placeholder="Phone number in 000-000-0000 format"><p id="phone_error"></p>
-            <input id="ip" placeholder="IP address in 000.000.000.000 format"><p id="ip_error"></p>
-            <button  onclick="q6()">Go</button>
+            <input id="phone" onkeyup="phonevalidate()" type="text" placeholder="Phone number in 000-000-0000 format"><p id="phone_error"></p>
+            <input id="ip" onkeyup="ipvalidate()" placeholder="IP address in 000.000.000.000 format"><p id="ip_error"></p>
         </body>
     </html>

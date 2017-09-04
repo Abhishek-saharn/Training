@@ -8,6 +8,10 @@ function vali() {
         alert("all fields are required");
         return false;
     }
+    var namerex = /^[A-z ]$/;
+    if(namerex.test(name)){
+        alert("Name not valid");
+    }
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if(!re.test(email)){
         alert("Email Not valid");

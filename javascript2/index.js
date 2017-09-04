@@ -56,21 +56,3 @@ function q4(){
 
     alert("Intersection will be : "+ arr3); 
 }
-
-function q6(){
-    var phone = document.getElementById("phone").value;
-    var ip = document.getElementById("ip").value;
-    var pregex = /^([0-9]{3}[-]){2}[0-9]{4}$/;
-    var iregex = /^([0-9]{3}[\.]){3}[0-9]{3}$/;
-    if(pregex.test(phone) && phone.length==12){
-        alert("Phone valid");
-    }else{
-        document.getElementById("phone_error").innerHTML = "Invalid Phone";
-    }
-
-    if(iregex.test(ip) && ip.length == 15){
-        alert("IP Valid");
-    }else{
-        document.getElementById("ip_error").innerHTML = "Invalid ip";
-    }
-}
