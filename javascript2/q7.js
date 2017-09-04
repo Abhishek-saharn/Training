@@ -3,14 +3,17 @@ function vali() {
     var name = document.getElementById("name").value;
     var email = document.getElementById("email").value;
     var phone = document.getElementById("phonenumber").value;
-
+    
     if(name==""||email==""||phone==""){
         alert("all fields are required");
         return false;
     }
-    var namerex = /^[A-z ]$/;
-    if(namerex.test(name)){
+    var namerex = /^[A-z ]+$/;
+    console.log(name.length);
+    if(name.length < 2 || !namerex.test(name)){
         alert("Name not valid");
+        return false;
+
     }
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if(!re.test(email)){
