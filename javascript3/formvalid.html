@@ -1,13 +1,30 @@
 
 <html>
         <head>
+            <title>TITLE</title>
+            <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
             <script src="formvalid.js"></script>
         </head>
         <body>
-           <form action="#" method="post" onsubmit="return vali()">
-               <input id="name" placeholder="Enter name" type="text" >
+           <form action="#" method="post" onsubmit="return validateSubmit()">
+               <input id="fname" placeholder="First name" type="text" >
+               <p id="fnamep"></p>
+               
+               <input id="lname" placeholder="Last name" type="text" >
+               <p id="lnamep"></p>
+               
+               <input id="phone" placeholder="Phone" >
+               <p id="phonep"></p>
+               
+               <input id="dob" placeholder="DateOfBirth" >
+               <p id="dobp"></p>
+               
                <input id="email" placeholder="Email Address" type="text">
-               <input id="phonenumber" placeholder="Phone" >
+               <p id="emailp"></p>
+               
+               <input id="password" placeholder="Password" >
+               <p id="passwordp"></p>
+               
                <input type="submit" value="Submit">
            </form>
         </body>
