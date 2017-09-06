@@ -1,0 +1,49 @@
+
+<html>
+    <head>
+        <title>TITLE</title>
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="index.js"></script>
+    </head>
+    <body style="background-color: #00A5B3">
+        <div style="padding-top: 10%" class="text-center" >
+            <button style="background-color: #F0544E" type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#modelId">
+                Launch Modal
+            </button>
+<!--             
+            <button style="background-color: #F0544E" id="btn-addform" type="button" class="btn btn-success btn-lg">
+                    Add Form
+            </button> -->
+            <div style="padding: 5% 20% 5% 20%;color: white" class="container contain-form">
+            <h1>Dynamic Form</h1>
+            <br/>
+            </div>
+            
+            <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div  class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="modelTitleId">Click Buttons to see magic.</h4>
+                        </div>
+                        <div class="modal-body">
+                            
+                                <div class="btn-group" role="group" aria-label="">
+                                    <button id="btn-alert" type="button" class="btn btn-primary ">Click to Alert</button>
+                                    <button id="btn-prompt" type="button" class="btn btn-primary ">Click to Prompt</button>
+                                </div>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
