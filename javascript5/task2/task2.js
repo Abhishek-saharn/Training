@@ -1,9 +1,11 @@
-$(document).ready(function(){
-    
-    // $.getJSON('accdata.json',function(data){
-    //     console.log(data);
-    // });
-    
+
+
+$(document).ready(function () {
+
+    $.getJSON('accdata.json',function(data){
+        console.log(data);
+    });
+
     let accdata = [
         {
             "title": "Title 1",
@@ -24,23 +26,23 @@ $(document).ready(function(){
     ]
     let card;
     count = 0;
-    accdata.forEach(x =>{
-        
+    accdata.forEach(x => {
+
         count++;
-        card = '<div class="card">'+
-                        '<div class="card-header" role="tab" id="sh'+count+'">'+
-                            '<h5 class="mb-0">'+
-                                '<a data-toggle="collapse" data-parent="#theaccordian" href="#sc'+count+'" aria-expanded="true" aria-controls="sc'+count+'">'+
-                        x.title +
-                        '</a>'+
-                            '</h5>'+
-                        '</div>'+
-                        '<div id="sc'+count+'" class="collapse in" role="tabpanel" aria-labelledby="sh'+count+'">'+
-                            '<div class="card-block">'+
-                                x.body +
-                            '</div>'+
-                        '</div>'+
-                    '</div>';
+        card = '<div class="card">' +
+            '<div class="card-header" role="tab" id="sh' + count + '">' +
+            '<h5 class="mb-0">' +
+            '<a data-toggle="collapse" data-parent="#theaccordian" href="#sc' + count + '" aria-expanded="true" aria-controls="sc' + count + '">' +
+            x.title +
+            '</a>' +
+            '</h5>' +
+            '</div>' +
+            '<div id="sc' + count + '" class="collapse in" role="tabpanel" aria-labelledby="sh' + count + '">' +
+            '<div class="card-block">' +
+            x.body +
+            '</div>' +
+            '</div>' +
+            '</div>';
         $('#theaccordian').append(card);
 
     });

@@ -12,23 +12,35 @@
 </head>
 
 <body style="background-color: #C64762">
-    <div style="padding :10% 20% 0 20%; " class="container form-container">
-        <div class="form-group">
-            <label for="typeselect">Type</label>
-            <select class="form-control" id="typeselect">
-                <option value="0">Text Box</option>
-                <option value="1">Select text</option>
-                <option value="2">Radio button</option>
-                
-            </select>
+    <div style="padding :10% 20% 0 20%; " class="container ">
+        <div class="form-cntainer">
+            <div class="form-group ">
+                <label for="typeselect">Type</label>
+                <select class="form-control" id="typeselect">
+                            <option value="0">Text Box</option>
+                            <option value="1">Select text</option>
+                            <option value="2">Radio button</option>
+                            
+                        </select>
+            </div>
+            <div class="form-group">
+                <label for="label">Label</label>
+                <input type="text" class="form-control" name="label" id="label" aria-describedby="helpId" placeholder="">
+            </div>
         </div>
-        <div class="form-group">
-          <label for="label">Label</label>
-          <input type="text"
-            class="form-control" name="label" id="label" aria-describedby="helpId" placeholder="">
+        <div class="dynamicFormSelect">
+
         </div>
 
+        <div class="dynamicFormRadio">
+
+        </div>
+
+        <button id="btn-addfeild" style="background-color: #00AB95" type="button" class="btn btn-success">
+                Add Feild
+        </button>
     </div>
+
     <form id="theform">
 
     </form>
