@@ -3,7 +3,7 @@ let radcount = 1;
 let value_button;
 let initRow;
 let values = [];
-let tselected;
+let tselected = '0';
 $(document).ready(function () {
 
     function addFields(index, firstTime) {
@@ -58,6 +58,70 @@ $(document).ready(function () {
 
     }
 
+    function buildForm(values, label) {
+
+
+        switch (tselected) {
+            case "0":
+
+                if ($('#theform-text' + label).length == 0) {
+                    let labelbox = '<div class="form-group">' +
+                        '<label for="label">' + label + '</label>' +
+                        '<input type="text" class="form-control" id="theform-text' + label + '" >' +
+                        '</div>';
+                    $('#theform').append(labelbox);
+                }
+
+
+                break;
+            case "1":
+
+                if ($('#theform-select' + label).length == 0) {
+                    let selecbox = '<div class="form-group">' +
+                        '<label>' + label + '</label>' +
+                        '<select class="form-control" id="theform-select' + label + '">' +
+
+                        '</select>' +
+                        '</div>';
+
+                    $('#theform').append(selecbox);
+                }
+                $('#theform-select' + label).empty();
+                values.forEach((v) => {
+                    let optionbox = '<option>' + v + '</option>';
+                    $('#theform-select' + label).append(optionbox);
+                });
+
+                break;
+            case "2":
+
+                if ($('#theform-radio' + label).length == 0) {
+                    let radbox = '<br/><label> '+label+'</label><br/><label  id="theform-radio'+label+'">'+
+                        '</label>';
+                    $('#theform').append(radbox);
+
+                }
+
+                $('#theform-radio' + label).empty();
+                values.forEach((v) => {
+
+                    let radiobox ='<div class="form-check">'+
+                    '<label class="form-check-label">'+ 
+                        '<input type="radio" name="'+label+'" class="form-check-input" >'
+                        + v +
+                        '</label>';
+                    $('#theform-radio' + label).append(radiobox);
+                });
+
+
+                break;
+        }
+        values = [];
+
+
+
+    }
+
 
     $('#typeselect').on('change', function () {
         tselected = $(('option:selected'), this).val();
@@ -96,16 +160,32 @@ $(document).ready(function () {
 
     });
 
+    function isValid(item) {
+        return item !== "" && item != undefined;
+    }
 
     $('#btn-addfeild').on('click', function () {
-        
-        $("input[name=tbox]").each(function () {
-            values.push($(this).val());
-        });
-        console.log(values);
-        
+        let glabel = $('input#label').val();
+        values = [];
+        if (glabel.trim() != "") {
+            $("input[name=tbox]").each(function () {
+                if (values.indexOf($(this).val()) === -1) {
+                    values.push($(this).val());
+                }
+            });
 
-        
+            values = values.filter(isValid);
+            
+            values.forEach(v => {
+                if (values.indexOf(v) === -1) {
+                    values.push(v);
+                }
+            });
+
+            console.log(values + glabel);
+
+            buildForm(values, glabel);
+        }
 
 
     });
