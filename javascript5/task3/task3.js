@@ -28,10 +28,10 @@ $(document).ready(function () {
             '<button id="close' + count + '" style="background-color: #00AB95" type="button" class="col-md-1 btn btn-success btn-sm delr">' +
             '          X' +
             '</button>' +
-            '<button id="up' + count + '" style="background-color: #00AB95" type="button" class="col-md-1 btn btn-success btn-sm">' +
+            '<button style="background-color: #00AB95" type="button" class="col-md-1 btn btn-success btn-sm up">' +
             '          ^' +
             '</button>' +
-            '<button id="down' + count + '" style="background-color: #00AB95" type="button" class="col-md-1 btn btn-success btn-sm">' +
+            '<button style="background-color: #00AB95" type="button" class="col-md-1 btn btn-success btn-sm down">' +
             '          V' +
             '</button>' +
             '</div>';
@@ -188,6 +188,15 @@ $(document).ready(function () {
         }
 
 
+    });
+
+    $('.dynamicFormSelect').on('click','.up,.down',function(){
+        let row = $(this).parents('.row:first');
+        if($(this).is('.up')){
+            row.insertBefore(row.prev());
+        }else{
+            row.insertAfter(row.next());
+        }  
     });
 
 

@@ -38,7 +38,7 @@ $(document).ready(function () {
             '</h5>' +
             '</div>' +
             '<div id="sc' + count + '" class="collapse in" role="tabpanel" aria-labelledby="sh' + count + '">' +
-            '<div class="card-block">' +
+            '<div style="padding:2%" class="card-block">' +
             x.body +
             '</div>' +
             '</div>' +
