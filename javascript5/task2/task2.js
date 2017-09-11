@@ -2,7 +2,7 @@
 
 $(document).ready(function () {
 
-    $.getJSON('accdata.json',function(data){
+    $.getJSON('./accdata.json',function(data){
         console.log(data);
     });
 
