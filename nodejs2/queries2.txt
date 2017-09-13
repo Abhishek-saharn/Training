@@ -1,0 +1,228 @@
+
+db.employees.insertMany(
+    [
+        {
+            emp_id: 1,
+            name: {
+                firstName: 'Abhishek',
+                lastName: 'Saharn'
+            },
+            contact: {
+                phone: "8727227211",
+                email: "abhish@gmail.com",
+                address: "i16,sector 12",
+            },
+            personal: {
+                gender: "Male",
+                dob: "21/12/1994",
+                education: "LPU"
+            },
+            work: {
+                role: "Developer",
+                level: "user",
+                title: "Software Engineer Trainee",
+                dept: "IT",
+                reporting_to: 3
+            }
+        },
+        {
+            emp_id: 2,
+            name: {
+                firstName: 'XYZ',
+                lastName: 'ABC'
+            },
+            contact: {
+                phone: "7218727221",
+                email: "xyzabc@gmail.com",
+                address: "sector 32",
+            },
+            personal: {
+                gender: "Male",
+                dob: "11/02/1992",
+                education: "college xyz"
+            },
+            work: {
+                role: "Developer",
+                level: "user",
+                title: "Associate Software Engineer",
+                dept: "IT",
+                reporting_to: 3
+            }
+        },
+        {
+            emp_id: 3,
+            name: {
+                firstName: 'Nikhil',
+                lastName: 'Sharma'
+            },
+            contact: {
+                phone: "8722317221",
+                email: "nikhilsharma@gmail.com",
+                address: "Delhi",
+            },
+            personal: {
+                gender: "Male",
+                dob: "10/05/1993",
+                education: "college xyz"
+            },
+            work: {
+                role: "Reporting Manager",
+                level: "subAdmin",
+                title: "CTE",
+                dept: "IT",
+                reporting_to: 4
+            }
+        },
+        {
+            emp_id: 4,
+            name: {
+                firstName: 'Sid',
+                lastName: ''
+            },
+            contact: {
+                phone: "8435343254",
+                email: "sid@gmail.com",
+                address: "Gurgaon",
+            },
+            personal: {
+                gender: "Male",
+                dob: "21/09/1991",
+                education: "college xyz"
+            },
+            work: {
+                role: "Reporting Manager",
+                level: "Admin",
+                title: "CEO",
+                dept: "Management",
+                reporting_to: 4
+            }
+        },
+        {
+            emp_id: 5,
+            name: {
+                firstName: 'Monika',
+                lastName: 'xyz'
+            },
+            contact: {
+                phone: "911223254",
+                email: "monika@gmail.com",
+                address: "gaon",
+            },
+            personal: {
+                gender: "female",
+                dob: "21/09/1991",
+                education: "college xyz"
+            },
+            work: {
+                role: "HR",
+                level: "subAdmin",
+                title: "HR Specialist",
+                dept: "HR",
+                reporting_to: 3
+            }
+        },
+        {
+            emp_id: 6,
+            name: {
+                firstName: 'Mayank',
+                lastName: 'Kumar'
+            },
+            contact: {
+                phone: "911223254",
+                email: "mayank@gmail.com",
+                address: "Gr. Noida",
+            },
+            personal: {
+                gender: "Male",
+                dob: "21/09/1991",
+                education: "college xyz"
+            },
+            work: {
+                role: "Developer",
+                level: "user",
+                title: "Sr. Software Engineer",
+                dept: "IT",
+                reporting_to: 3
+            }
+        }
+
+    ]
+)
+
+////////////////////////////////
+
+db.attendance.insertMany(
+    [
+        {
+            att_of: 1,
+            timings: [new Date()]
+
+        },
+        {
+            att_of: 2,
+            timings: []
+
+        },
+        {
+            att_of: 3,
+            timings: []
+
+        },
+        {
+            att_of: 4,
+            timings: []
+
+        },
+        {
+            att_of: 5,
+            timings: []
+
+        }
+    ]
+)
+//////////////////////////////
+
+
+db.leaves.insertMany(
+    [
+        {
+            l_of: 1,
+            compoff: 0,
+            earned: 0
+        },
+        {
+            l_of: 2,
+            compoff: 2,
+            earned: 9
+        },
+        {
+            l_of: 3,
+            compoff: 0,
+            earned: 1
+        },
+        {
+            l_of: 4,
+            compoff: 3,
+            earned: 20
+        },
+        {
+            l_of: 5,
+            compoff: 10,
+            earned: 5
+        },
+    ]
+)
+
+
+
+
+///////////
+
+
+
+db.employees.find(
+    {
+        $or: [{ "work.reporting_to": 3 }, { emp_id: 3 }]
+    }
+
+)

@@ -1,0 +1,196 @@
+use HRSystem
+
+/////////////////////////////////////
+
+db.users.insertMany(
+    [
+        {
+            myname: "Abhishek",
+            myid: 1,
+            mytime: {
+                leaves: {
+                    compoff: 0,
+                    earnedleave: 0
+                },
+                attendance: {
+                    in: [new Date()
+                    ],
+                    out: []
+                }
+            },
+            myteam: {
+                names: ["Name1", "Name2", "Name3"]
+            },
+            todo: {
+                Uncategorized: ["ut1", "ut2", "ut3"],
+                systasks: ["st1", "st2", "st3", "st4"]
+            },
+            employees: {
+                directory: [
+                    {
+                        name: "Abhshek",
+                        contact: "8727128112"
+                    },
+                    {
+                        name: "Prabal",
+                        contact: "872318112"
+                    },
+                    {
+                        name: "Sapna",
+                        contact: "8221128112"
+                    },
+                    {
+                        name: "Rahul",
+                        contact: "8112872712"
+                    },
+                    {
+                        name: "inder",
+                        contact: "7728727122"
+                    },
+
+                ],
+                engage: ["policy", "Article1", "Article2"]
+            }
+
+        },
+        {
+            myname: "Prabal",
+            myid: 2,
+            mytime: {
+                leaves: {
+                    compoff: 1,
+                    earnedleave: 3
+                },
+                attendance: {
+                    in: [new Date()
+                    ],
+                    out: []
+                }
+            },
+            myteam: {
+                names: ["Name2", "Name3"]
+            },
+            todo: {
+                Uncategorized: ["ut2", "ut3"],
+                systasks: ["st1", "st4"]
+            },
+            employees: {
+                directory: [
+                    {
+                        name: "Abhshek",
+                        contact: "8727128112"
+                    },
+                    {
+                        name: "Prabal",
+                        contact: "872318112"
+                    },
+                    {
+                        name: "Sapna",
+                        contact: "8221128112"
+                    },
+                    {
+                        name: "Rahul",
+                        contact: "8112872712"
+                    },
+                    {
+                        name: "inder",
+                        contact: "7728727122"
+                    },
+
+                ],
+                engage: ["policy", "Article1", "Article2"]
+
+            }
+
+        },
+        {
+            myname: "Rahul",
+            myid: 3,
+            mytime: {
+                leaves: {
+                    compoff: 3,
+                    earnedleave: 10
+                },
+                attendance: {
+                    in: [new Date()
+                    ],
+                    out: []
+                }
+            },
+            myteam: {
+                names: ["Name4", "Name2", "Name3", "Name0"]
+            },
+            todo: {
+                Uncategorized: ["ut1", "ut2", "ut3", "uta", "ut10", "ut9"],
+                systasks: ["st1", "st2", "st3", "st4"]
+            },
+            employees: {
+                directory: [
+                    {
+                        name: "Abhshek",
+                        contact: "8727128112"
+                    },
+                    {
+                        name: "Prabal",
+                        contact: "872318112"
+                    },
+                    {
+                        name: "Sapna",
+                        contact: "8221128112"
+                    },
+                    {
+                        name: "Rahul",
+                        contact: "8112872712"
+                    },
+                    {
+                        name: "inder",
+                        contact: "7728727122"
+                    },
+
+                ],
+                engage: ["policy", "Article1", "Article2"]
+
+            }
+
+        }
+    ]
+)
+
+//////////////////////
+
+db.users.findOne(
+    {
+        "myname": "Abhishek"
+    }
+)
+
+/////////////////////
+
+db.users.find(
+    {
+        "mytime.leaves.compoff": { $gt: 0 }
+    }
+)
+
+/////////////////////
+
+db.users.update(
+    {
+        myid: 1
+    },
+    {
+        $set: { "mytime.leaves.compoff": 6 },
+        $push: { "myteam.names": "Neha" }
+
+    }
+)
+
+
+////////////////////////////
+
+db.users.remove(
+    {
+        "mytime.leaves.earnedleave": { $lt: 1 }
+    }, true
+
+)
