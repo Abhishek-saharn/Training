@@ -1,0 +1,14 @@
+{
+  "name": "node.js3",
+  "version": "1.0.0",
+  "description": "Node.js Task 3 with Express routing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "abhishek_saharn",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^4.11.11"
+  }
+}
