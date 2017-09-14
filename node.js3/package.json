@@ -4,11 +4,23 @@
   "description": "Node.js Task 3 with Express routing",
   "main": "index.js",
   "scripts": {
+    "build": "babel ./ --out-dir dist/ --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
+    "start": "npm run build && nodemon server.js",
+    "watch": "babel -w src/ -d dist/",
+    "serve": "babel -w src/ -d dist/ | nodemon --watch dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "abhishek_saharn",
   "license": "ISC",
   "dependencies": {
+    "mongojs": "^2.4.1",
     "mongoose": "^4.11.11"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "nodemon": "^1.12.0"
   }
 }

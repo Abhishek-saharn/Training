@@ -1,4 +1,5 @@
 var mongoose = require("mongoose")
+var ObjectId = require("mongojs").ObjectID;
 
 var Schema = mongoose.Schema;
 
@@ -7,7 +8,7 @@ function email_validator(email) {
     return re.test(email);
 }
 
-function name_validator(input){
+function name_validator(input) {
     return /^[A-z0-9]+$/.test(input);
 }
 
@@ -35,15 +36,74 @@ var UserSchema = new Schema({
     }
 });
 
-UserSchema.statics.insert = function(username, user, name){
 
-    // mongo // username user name ;
+UserSchema.statics = {
+    insert: function (formData) {
+        return new Promise((resolve, reject) => {
 
-    // return query ans;
+            const obj = {
+                name: formData.name,
+                username: formData.username,
+                email: formData.email,
+            };
 
-    // return error;
-    
+            this.create(obj)
+                .then((data) => {
+
+                    return resolve(data.id);
+                })
+                .catch((error) => {
+
+                    return reject(error);
+                });
+        });
+    },
+    find: function (uID) {
+
+        return new Promise((resolve, reject) => {
+            this.findOne({
+                    "_id": ObjectId(uID)
+                })
+                .then((data) => {
+                    return resolve(data)
+                })
+                .catch((error) => {
+                    return reject(error)
+                });
+        });
+    },
+    update: function (uID, name) {
+        return new Promise((resolve, reject) => {
+            this.updateOne({
+                    _id: ObjectId(uID)
+                }, {
+                    $set: {
+                        "name": name
+                    }
+                })
+                .then((data) => {
+                    return resolve(uID);
+                })
+                .catch((err) => {
+                    return reject(err);
+                });
+        });
+    },
+    udelete: function (uID) {
+        return new Promise((resolve, reject) => {
+
+            this.deleteOne({
+                    _id: ObjectId(uID)
+                }).then((data) => {
+                    return resolve(data)
+                })
+                .catch((err) => {
+                    return reject(err);
+                });
+        });
+    }
+
 }
 
 
-module.exports = mongoose.model('Users',UserSchema);
+module.exports = mongoose.model('User', UserSchema);
