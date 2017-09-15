@@ -1,14 +1,13 @@
 require("babel-core/register");
-require("./src/config.es6");
 var express = require('express');
 var body_parser = require('body-parser');
 var cookie_parser = require('cookie-parser');
 var mongoose = require("mongoose")
-var userRoute = require('./api/user/user.route.js');
+const userRoute = require('./api/user/user.route.js');
 
 var app = express();
 
-mongoose.promise = global.promise;
+// mongoose.promise = global.promise;
 
 mongoose.connect('mongodb://localhost/test',function (error) {
     if(error) {

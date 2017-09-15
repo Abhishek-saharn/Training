@@ -42,7 +42,6 @@ UserSchema.statics = {
         var _this = this;
 
         return new Promise(function (resolve, reject) {
-            console.log('satics insert', formData);
 
             var obj = {
                 name: formData.name,
@@ -63,8 +62,10 @@ UserSchema.statics = {
         var _this2 = this;
 
         return new Promise(function (resolve, reject) {
+            console.log(_this2);
+
             _this2.findOne({
-                "_id": ObjectId("59ba5e226333c854c7c9b084")
+                "_id": ObjectId("59ba58428c06264c5ddb155a")
             }).then(function (data) {
                 console.log(data);
                 return resolve(data);

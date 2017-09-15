@@ -1,10 +1,10 @@
-var mongoose = require("mongoose")
-var ObjectId = require("mongojs").ObjectID;
+const mongoose = require("mongoose")
+const ObjectId = require("mongojs").ObjectID;
 
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 function email_validator(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
 }
 
@@ -13,11 +13,11 @@ function name_validator(input) {
 }
 
 
-var customMail = [email_validator, "Email not valid"];
-var customName = [name_validator, "Name must Be alpha-Numeric"];
+let customMail = [email_validator, "Email not valid"];
+let customName = [name_validator, "Name must Be alpha-Numeric"];
 
 
-var UserSchema = new Schema({
+let UserSchema = new Schema({
 
     username: {
         type: String,
