@@ -7,7 +7,8 @@ export let saveUser = function (req, res) {
     var formdata = {
         username: req.body.username,
         email: req.body.email,
-        name: req.body.name
+        name: req.body.name,
+        password: req.body.password
     }
     User.insert(formdata)
         .then((data) => {

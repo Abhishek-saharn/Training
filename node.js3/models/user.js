@@ -33,7 +33,12 @@ let UserSchema = new Schema({
         type: String,
         required: true,
         validate: customName
+    },
+    password: {
+        type: String,
+        required: true
     }
+
 });
 
 
@@ -45,6 +50,7 @@ UserSchema.statics = {
                 name: formData.name,
                 username: formData.username,
                 email: formData.email,
+                password: formData.password
             };
 
             this.create(obj)
