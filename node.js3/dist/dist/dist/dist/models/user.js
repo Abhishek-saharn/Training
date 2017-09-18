@@ -1,6 +1,7 @@
 "use strict";
 
 var mongoose = require("mongoose");
+var ObjectId = require("mongojs").ObjectID;
 
 var Schema = mongoose.Schema;
 
@@ -36,59 +37,11 @@ var UserSchema = new Schema({
     }
 });
 
-// UserSchema.statics = {
-//     insert : function (formData, callback) {
-//         var obj = {
-//             name: formData.name,
-//             username: formData.username,
-//             email: formData.email,
-//         };
-//         this.create(obj,function (err, data) {
-//             if (err) return callback(err, null);
-//             return callback(null, data.id);
-//         });
-
-//         // this.name = formData.name;
-//         // this.username = formData.username;
-//         // this.email = formData.email;
-//         // user1.save(function (err, data) {
-//         //     if (err) return callback(err, null);
-//         //     return callback(null, data.id);
-//         // });
-//     }
-
-// }
-
-// UserSchema.statics = {
-//     insert : function (formData, callback) {
-//         var obj = {
-//             name: formData.name,
-//             username: formData.username,
-//             email: formData.email,
-//         };
-//         this.create(obj,function (err, data) {
-//             if (err) return callback(err, null);
-//             return callback(null, data.id);
-//         });
-
-//         // this.name = formData.name;
-//         // this.username = formData.username;
-//         // this.email = formData.email;
-//         // user1.save(function (err, data) {
-//         //     if (err) return callback(err, null);
-//         //     return callback(null, data.id);
-//         // });
-//     }
-
-// }
-
-
 UserSchema.statics = {
     insert: function insert(formData) {
         var _this = this;
 
         return new Promise(function (resolve, reject) {
-            console.log('satics insert', formData);
 
             var obj = {
                 name: formData.name,
@@ -96,29 +49,60 @@ UserSchema.statics = {
                 email: formData.email
             };
 
-            console.log('username is ', obj);
-
             _this.create(obj).then(function (data) {
-                console.log('>>>>>>>>>>>>>>>>>>', data);
-                return resolve(data);
+
+                return resolve(data.id);
             }).catch(function (error) {
-                console.log('>>>>>>>>>>>>>>>>>>', error);
+
                 return reject(error);
             });
         });
     },
     find: function find(uID) {
-        that = this;
+        var _this2 = this;
+
         return new Promise(function (resolve, reject) {
-            that.findOne({
-                _id: uID
+            _this2.findOne({
+                "_id": ObjectId(uID)
             }).then(function (data) {
                 return resolve(data);
             }).catch(function (error) {
                 return reject(error);
             });
         });
+    },
+    update: function update(uID, name) {
+        var _this3 = this;
+
+        return new Promise(function (resolve, reject) {
+            _this3.updateOne({
+                _id: ObjectId(uID)
+            }, {
+                $set: {
+                    "name": name
+                }
+            }).then(function (data) {
+                return resolve(uID);
+            }).catch(function (err) {
+                return reject(err);
+            });
+        });
+    },
+    udelete: function udelete(uID) {
+        var _this4 = this;
+
+        return new Promise(function (resolve, reject) {
+
+            _this4.deleteOne({
+                _id: ObjectId(uID)
+            }).then(function (data) {
+                return resolve(data);
+            }).catch(function (err) {
+                return reject(err);
+            });
+        });
     }
+
 };
 
 module.exports = mongoose.model('User', UserSchema);

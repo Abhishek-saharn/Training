@@ -42,6 +42,7 @@ UserSchema.statics = {
         var _this = this;
 
         return new Promise(function (resolve, reject) {
+            console.log('satics insert', formData);
 
             var obj = {
                 name: formData.name,
@@ -63,46 +64,15 @@ UserSchema.statics = {
 
         return new Promise(function (resolve, reject) {
             _this2.findOne({
-                "_id": ObjectId(uID)
+                "_id": ObjectId("59ba5e226333c854c7c9b084")
             }).then(function (data) {
+                console.log(data);
                 return resolve(data);
             }).catch(function (error) {
                 return reject(error);
             });
         });
-    },
-    update: function update(uID, name) {
-        var _this3 = this;
-
-        return new Promise(function (resolve, reject) {
-            _this3.updateOne({
-                _id: ObjectId(uID)
-            }, {
-                $set: {
-                    "name": name
-                }
-            }).then(function (data) {
-                return resolve(uID);
-            }).catch(function (err) {
-                return reject(err);
-            });
-        });
-    },
-    udelete: function udelete(uID) {
-        var _this4 = this;
-
-        return new Promise(function (resolve, reject) {
-
-            _this4.deleteOne({
-                _id: ObjectId(uID)
-            }).then(function (data) {
-                return resolve(data);
-            }).catch(function (err) {
-                return reject(err);
-            });
-        });
     }
-
 };
 
 module.exports = mongoose.model('User', UserSchema);
