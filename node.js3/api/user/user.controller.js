@@ -103,3 +103,11 @@ export let deleteUser = (req, res) => {
         });
 
 }
+
+export const reqRole = (role)=>{
+    return function(req,res,next){
+        // if(){
+
+        // }
+    }
+}
