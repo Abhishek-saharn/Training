@@ -1,5 +1,7 @@
 const mongoose = require("mongoose")
 const ObjectId = require("mongojs").ObjectID;
+const jwt = require("jsonwebtoken");
+const config = require('../config.js');
 
 const Schema = mongoose.Schema;
 
@@ -62,6 +64,46 @@ UserSchema.statics = {
 
                     return reject(error);
                 });
+        });
+    },
+    login: function (formData) {
+        return new Promise((resolve, reject) => {
+            this.findOne({
+                    username: formData.username
+                })
+                .then((user) => {
+                    if (user.password != formData.password) {
+                        console.log("Not matched", user.password, formData.password)
+                        return reject("Wrong Password");
+                    } else {
+                        console.log("Matched", user.password, formData.password)
+                        var token = jwt.sign({
+                            user
+                        }, config.secret, {
+                            expiresIn: '10m',
+                            algorithm: 'HS256'
+                        });
+                        return resolve(token);
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                    return reject(err);
+                });
+        });
+    },
+    authUser: function (token) {
+        return new Promise((resolve, reject) => {
+            if (token) {
+                jwt.verify(token, config.secret, (error, data) => {
+                    if (error) {
+                        return reject(error);
+                    }
+                    return resolve(data);
+                });
+            } else {
+                return reject("No token Found!")
+            }
         });
     },
     find: function (uID) {

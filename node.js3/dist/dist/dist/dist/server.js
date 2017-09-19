@@ -6,12 +6,12 @@ var body_parser = require('body-parser');
 var cookie_parser = require('cookie-parser');
 var mongoose = require("mongoose");
 var userRoute = require('./api/user/user.route.js');
-
+var config = require('./config.js');
 var app = express();
 
 // mongoose.promise = global.promise;
 
-mongoose.connect('mongodb://localhost/test', function (error) {
+mongoose.connect(config.database, function (error) {
     if (error) {
         console.log('Please make sure mongo DB is running');
         throw error;

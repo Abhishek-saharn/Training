@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.deleteUser = exports.updateUser = exports.findUser = exports.saveUser = undefined;
+exports.deleteUser = exports.updateUser = exports.findUser = exports.login = exports.saveUser = undefined;
 
 var _helper = require('../../utils/helper');
 
@@ -12,9 +12,21 @@ var saveUser = exports.saveUser = function saveUser(req, res) {
     var formdata = {
         username: req.body.username,
         email: req.body.email,
-        name: req.body.name
+        name: req.body.name,
+        password: req.body.password
     };
     User.insert(formdata).then(function (data) {
+        return res.send((0, _helper.helper)("ok", data));
+    }).catch(function (error) {
+        return res.send((0, _helper.helper)("Error", error));
+    });
+};
+var login = exports.login = function login(req, res) {
+    var formdata = {
+        username: req.body.username,
+        password: req.body.password
+    };
+    User.login(formdata).then(function (data) {
         return res.send((0, _helper.helper)("ok", data));
     }).catch(function (error) {
         return res.send((0, _helper.helper)("Error", error));

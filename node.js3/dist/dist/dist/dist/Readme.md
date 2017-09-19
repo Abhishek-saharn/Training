@@ -91,9 +91,9 @@ This task is on runnable on Local Machine
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is not licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
-* Thank you Prabal, Rahul for guidance.
+* Thank you **Prabal**, **Rahul** for guidance.
 * [Stackoverflow](https://www.stackoverflow.com)

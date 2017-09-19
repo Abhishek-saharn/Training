@@ -1,6 +1,7 @@
 "use strict";
 
 var mongoose = require("mongoose");
+var ObjectId = require("mongojs").ObjectID;
 
 var Schema = mongoose.Schema;
 
@@ -36,53 +37,6 @@ var UserSchema = new Schema({
     }
 });
 
-// UserSchema.statics = {
-//     insert : function (formData, callback) {
-//         var obj = {
-//             name: formData.name,
-//             username: formData.username,
-//             email: formData.email,
-//         };
-//         this.create(obj,function (err, data) {
-//             if (err) return callback(err, null);
-//             return callback(null, data.id);
-//         });
-
-//         // this.name = formData.name;
-//         // this.username = formData.username;
-//         // this.email = formData.email;
-//         // user1.save(function (err, data) {
-//         //     if (err) return callback(err, null);
-//         //     return callback(null, data.id);
-//         // });
-//     }
-
-// }
-
-// UserSchema.statics = {
-//     insert : function (formData, callback) {
-//         var obj = {
-//             name: formData.name,
-//             username: formData.username,
-//             email: formData.email,
-//         };
-//         this.create(obj,function (err, data) {
-//             if (err) return callback(err, null);
-//             return callback(null, data.id);
-//         });
-
-//         // this.name = formData.name;
-//         // this.username = formData.username;
-//         // this.email = formData.email;
-//         // user1.save(function (err, data) {
-//         //     if (err) return callback(err, null);
-//         //     return callback(null, data.id);
-//         // });
-//     }
-
-// }
-
-
 UserSchema.statics = {
     insert: function insert(formData) {
         var _this = this;
@@ -96,23 +50,23 @@ UserSchema.statics = {
                 email: formData.email
             };
 
-            console.log('username is ', obj);
-
             _this.create(obj).then(function (data) {
-                console.log('>>>>>>>>>>>>>>>>>>', data);
-                return resolve(data);
+
+                return resolve(data.id);
             }).catch(function (error) {
-                console.log('>>>>>>>>>>>>>>>>>>', error);
+
                 return reject(error);
             });
         });
     },
     find: function find(uID) {
-        that = this;
+        var _this2 = this;
+
         return new Promise(function (resolve, reject) {
-            that.findOne({
-                _id: uID
+            _this2.findOne({
+                "_id": ObjectId("59ba5e226333c854c7c9b084")
             }).then(function (data) {
+                console.log(data);
                 return resolve(data);
             }).catch(function (error) {
                 return reject(error);

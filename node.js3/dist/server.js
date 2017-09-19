@@ -28,6 +28,8 @@ app.use(cookie_parser());
 
 app.use('/api', userRoute);
 
+app.set('jwtSecret', config.secret);
+
 app.listen(process.env.PORT || 8000, function (err) {
     if (err) {
         console.log(err);

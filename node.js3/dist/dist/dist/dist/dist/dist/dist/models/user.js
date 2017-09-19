@@ -62,18 +62,47 @@ UserSchema.statics = {
         var _this2 = this;
 
         return new Promise(function (resolve, reject) {
-            console.log(_this2);
-
             _this2.findOne({
-                "_id": ObjectId("59ba58428c06264c5ddb155a")
+                "_id": ObjectId(uID)
             }).then(function (data) {
-                console.log(data);
                 return resolve(data);
             }).catch(function (error) {
                 return reject(error);
             });
         });
+    },
+    update: function update(uID, name) {
+        var _this3 = this;
+
+        return new Promise(function (resolve, reject) {
+            _this3.updateOne({
+                _id: ObjectId(uID)
+            }, {
+                $set: {
+                    "name": name
+                }
+            }).then(function (data) {
+                return resolve(uID);
+            }).catch(function (err) {
+                return reject(err);
+            });
+        });
+    },
+    udelete: function udelete(uID) {
+        var _this4 = this;
+
+        return new Promise(function (resolve, reject) {
+
+            _this4.deleteOne({
+                _id: ObjectId(uID)
+            }).then(function (data) {
+                return resolve(data);
+            }).catch(function (err) {
+                return reject(err);
+            });
+        });
     }
+
 };
 
 module.exports = mongoose.model('User', UserSchema);
