@@ -24,7 +24,7 @@ let UserSchema = new Schema({
     username: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
     },
     email: {
         type: String,
@@ -40,10 +40,10 @@ let UserSchema = new Schema({
         type: String,
         required: true
     },
-    role:{
-        type:String,
-        required:true,
-    }
+    role: {
+        type: String,
+        required: true,
+    },
 
 });
 
@@ -56,18 +56,13 @@ UserSchema.statics = {
                 name: formData.name,
                 username: formData.username,
                 email: formData.email,
-                password: formData.password
+                password: formData.password,
+                role: formData.role
             };
 
             this.create(obj)
-                .then((data) => {
-
-                    return resolve(data.id);
-                })
-                .catch((error) => {
-
-                    return reject(error);
-                });
+                .then(data => resolve(data.id))
+                .catch(error => reject(error));
         });
     },
     login: function (formData) {

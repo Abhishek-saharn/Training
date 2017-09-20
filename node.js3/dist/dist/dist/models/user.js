@@ -2,6 +2,7 @@
 
 var mongoose = require("mongoose");
 var ObjectId = require("mongojs").ObjectID;
+var jwt = require("jsonwebtoken");
 
 var Schema = mongoose.Schema;
 
@@ -34,7 +35,12 @@ var UserSchema = new Schema({
         type: String,
         required: true,
         validate: customName
+    },
+    password: {
+        type: String,
+        required: true
     }
+
 });
 
 UserSchema.statics = {
@@ -46,7 +52,8 @@ UserSchema.statics = {
             var obj = {
                 name: formData.name,
                 username: formData.username,
-                email: formData.email
+                email: formData.email,
+                password: formData.password
             };
 
             _this.create(obj).then(function (data) {
@@ -58,11 +65,31 @@ UserSchema.statics = {
             });
         });
     },
-    find: function find(uID) {
+    login: function login(formData) {
         var _this2 = this;
 
         return new Promise(function (resolve, reject) {
-            _this2.findOne({
+            _this2.find({
+                username: formData.username
+            }).then(function (user) {
+                if (user.password != formData.password) {
+                    return reject("Wrong Password");
+                } else {
+                    var token = jwt.sign(user, app.get('jwtSecret'), {
+                        expiresInMinutes: 5
+                    });
+                    return resolve(token);
+                }
+            }).catch(function (err) {
+                return reject(err);
+            });
+        });
+    },
+    find: function find(uID) {
+        var _this3 = this;
+
+        return new Promise(function (resolve, reject) {
+            _this3.findOne({
                 "_id": ObjectId(uID)
             }).then(function (data) {
                 return resolve(data);
@@ -72,10 +99,10 @@ UserSchema.statics = {
         });
     },
     update: function update(uID, name) {
-        var _this3 = this;
+        var _this4 = this;
 
         return new Promise(function (resolve, reject) {
-            _this3.updateOne({
+            _this4.updateOne({
                 _id: ObjectId(uID)
             }, {
                 $set: {
@@ -89,11 +116,11 @@ UserSchema.statics = {
         });
     },
     udelete: function udelete(uID) {
-        var _this4 = this;
+        var _this5 = this;
 
         return new Promise(function (resolve, reject) {
 
-            _this4.deleteOne({
+            _this5.deleteOne({
                 _id: ObjectId(uID)
             }).then(function (data) {
                 return resolve(data);

@@ -1,7 +1,6 @@
-"use strict";
+'use strict';
 
 require("babel-core/register");
-require("./src/config.es6");
 var express = require('express');
 var body_parser = require('body-parser');
 var cookie_parser = require('cookie-parser');

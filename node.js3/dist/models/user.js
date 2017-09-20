@@ -3,6 +3,7 @@
 var mongoose = require("mongoose");
 var ObjectId = require("mongojs").ObjectID;
 var jwt = require("jsonwebtoken");
+var config = require('../config.js');
 
 var Schema = mongoose.Schema;
 
@@ -39,6 +40,10 @@ var UserSchema = new Schema({
     password: {
         type: String,
         required: true
+    },
+    role: {
+        type: String,
+        required: true
     }
 
 });
@@ -69,20 +74,40 @@ UserSchema.statics = {
         var _this2 = this;
 
         return new Promise(function (resolve, reject) {
-            _this2.find({
+            _this2.findOne({
                 username: formData.username
             }).then(function (user) {
                 if (user.password != formData.password) {
+                    console.log("Not matched", user.password, formData.password);
                     return reject("Wrong Password");
                 } else {
-                    var token = jwt.sign(user, app.get('jwtSecret'), {
-                        expiresInMinutes: 5
+                    console.log("Matched", user.password, formData.password);
+                    var token = jwt.sign({
+                        user: user
+                    }, config.secret, {
+                        expiresIn: '10m',
+                        algorithm: 'HS256'
                     });
                     return resolve(token);
                 }
             }).catch(function (err) {
+                console.log(err);
                 return reject(err);
             });
+        });
+    },
+    authUser: function authUser(token) {
+        return new Promise(function (resolve, reject) {
+            if (token) {
+                jwt.verify(token, config.secret, function (error, data) {
+                    if (error) {
+                        return reject(error);
+                    }
+                    return resolve(data);
+                });
+            } else {
+                return reject("No token Found!");
+            }
         });
     },
     find: function find(uID) {
