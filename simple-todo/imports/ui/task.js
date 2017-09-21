@@ -1,0 +1,19 @@
+import {
+    Meteor
+} from 'meteor/meteor';
+
+import {
+    Template
+} from 'meteor/templating';
+
+
+import './task.html';
+
+Template.taskq.events({
+    'click .toggle-checked' () {
+        Meteor.call('tasks-setChecked',this._id,!this.checked);
+    },
+    'click .delete' () {
+        Meteor.call('tasks.remove',this._id);
+    },
+});

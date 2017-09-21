@@ -1,0 +1,40 @@
+import {
+    Meteor
+} from 'meteor/meteor';
+import {
+    check
+} from 'meteor/check';
+import {
+    Mongo
+} from 'meteor/mongo';
+
+export const Tasks = new Mongo.Collection('tasks');
+
+Meteor.methods({
+    'tasks.insert' (text) {
+        check(text, String);
+        if (!Meteor.userId()) {
+            throw new Meteor.Error("Not authorize");
+
+        }
+        Tasks.insert({
+            text: text,
+            createdAt: new Date(),
+            owner: Meteor.userId(),
+            username: Meteor.user().username,
+        });
+    },
+    'tasks.remove' (taskId) {
+        check(taskId, String);
+        Tasks.remove(taskId);
+    },
+    'tasks-setChecked' (taskId, setChecked) {
+        check(taskId, String);
+        check(setChecked, String);
+        Tasks.update(taskId, {
+            $set: {
+                checked: setChecked
+            }
+        });
+    }
+});
