@@ -18,7 +18,9 @@ import './body.html';
 
 Template.body.onCreated(function bodyOnCreated() {
     this.kuchBhi = new ReactiveDict();
-    console.log(this.kuchBhi, "<<<<<>>>>>>>>>>", new ReactiveDict());
+
+    Meteor.subscribe('ta');
+
 
 });
 
@@ -63,9 +65,9 @@ Template.body.events({
 
         const text = target.text.value;
         console.log('target', target, text);
-
-        Meteor.call('tasks.insert',text);
-
+        this.xz = "hello";
+        Meteor.call('tasks.insert', text);
+        console.log('>>>>>', this);
         target.text.value = '';
     },
     'change .hide-completed input' (event, instance) {
