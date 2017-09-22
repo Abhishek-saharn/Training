@@ -51,7 +51,7 @@ Meteor.methods({
         });
 
         if (task.private && task.owner != Meteor.userId()) {
-            throw new Meteor.Error('not-Auth')
+            throw new Meteor.Error('not-Auth');
         }
         Tasks.remove(taskId);
     },
@@ -75,6 +75,6 @@ Meteor.methods({
             $set: {
                 private: setToPrivate,
             }
-        });
+      });
     },
 });

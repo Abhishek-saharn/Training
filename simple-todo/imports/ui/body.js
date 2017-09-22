@@ -53,6 +53,9 @@ Template.body.helpers({
             }
         }).count();
     },
+    size(){
+        return Meteor.settings.public.contentSize;
+    }
 
 });
 

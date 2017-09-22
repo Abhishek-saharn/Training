@@ -1,7 +1,11 @@
 <body>
     <div class="container">
         <header>
-            <h1>Todo List ({{inccompleteCount}})</h1>
+            <h1>Todo List 
+                {{#if currentUser}}
+             (   {{inccompleteCount}}
+            ){{/if}}
+                </h1>
             <label class="hide-completed">
                 <input type="checkbox" />
                 Hide Completed Tasks
@@ -15,7 +19,9 @@
         </header>
 
         <ul>
+            {{#if currentUser}}
             {{#each tasksz}} {{> taskq}} {{/each}}
+            {{/if}}
         </ul>
     </div>
 </body>
