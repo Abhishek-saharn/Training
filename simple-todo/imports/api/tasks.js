@@ -24,6 +24,12 @@ if (Meteor.isServer) {
             ],
         });
     });
+
+    Meteor.publish('updatedName', (id) => {
+        return Tasks.find({
+            _id: id
+        })
+    });
 }
 
 
@@ -75,6 +81,23 @@ Meteor.methods({
             $set: {
                 private: setToPrivate,
             }
-      });
+        });
+    },
+    'tasks.update' (newText, taskId) {
+        check(newText, String);
+        check(taskId, String);
+
+        const task = Tasks.findOne(taskId);
+        // console.log(Meteor.user());
+        if (task.owner !== Meteor.userId()) {
+            throw new Meteor.Error('not Authorized');
+        }
+        (Tasks.update(taskId, {
+            $set: {
+                text: newText,
+            }
+        }));
+
+
     },
 });

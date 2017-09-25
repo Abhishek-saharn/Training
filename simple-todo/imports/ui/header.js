@@ -27,18 +27,7 @@ Template.header.helpers({
 });
 
 Template.body.events({
-    // 'submit .new-task' (event) {
-    //     console.log(event)
-    //     event.preventDefault();
-    //     const target = event.target;
-
-    //     const text = target.text.value;
-    //     console.log('target', target, text);
-    //     this.xz = "hello";
-    //     Meteor.call('tasks.insert', text);
-    //     console.log('>>>>>', this);
-    //     target.text.value = '';
-    // },
+    
     'change .hide-completed input' (event, instance) {
         console.log(instance, "<<<<<>>>>>>>>>", event.target.checked);
         hideCompleted = event.target.checked;

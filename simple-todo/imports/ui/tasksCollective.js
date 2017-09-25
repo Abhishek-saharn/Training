@@ -46,7 +46,7 @@ Template.tasksCollective.helpers({
             sort: {
                 createdAt: -1
             }
-        }).fetch().slice(0, contentS);
+        }).fetch().slice(0, contentS);  
 
 
         return totalTasks;
