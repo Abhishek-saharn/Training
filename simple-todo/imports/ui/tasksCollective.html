@@ -1,0 +1,9 @@
+<template name="tasksCollective">
+    <ul>
+    {{#if currentUser}} 
+        {{#each tasksz}} 
+            {{> taskq}} 
+        {{/each}} 
+    {{/if}}
+    </ul>
+</template>

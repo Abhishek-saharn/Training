@@ -1,0 +1,11 @@
+<template name="header">
+    <h1>Todo List {{#if currentUser}} ( {{inccompleteCount}} ){{/if}}
+    </h1>
+    <label class="hide-completed">
+                <input type="checkbox" />
+                Hide Completed Tasks
+    </label> {{> loginButtons}} 
+    {{#if currentUser}}
+    <button name="add">Add Task</button> 
+    {{/if}}
+</template>
