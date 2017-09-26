@@ -14,7 +14,7 @@ import {
 } from '../api/tasks.js';
 import './header.js';
 import './tasksCollective.js';
-import './addTask.js';
+// import './addTask.js';
 import './update.js';
 import './body.html';
 

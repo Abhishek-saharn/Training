@@ -7,8 +7,18 @@
     </label> {{> loginButtons}} 
     {{#if currentUser}}
     
-
+    {{> Template.dynamic template=addcontend}}
     
-    <a href="/tasks/add"><button name="add">Add Task</button></a> 
+    <!-- <a href="/tasks/add"><button name="add">Add Task</button></a>  -->
     {{/if}}
+</template>
+
+<template name="adding">
+        <button name="adding" class="adding">Cancel</button>
+        <form method="POST" class="new-task">
+            <input type="text" name="text" placeholder="Type to add new tasks" />
+        </form>
+</template>
+<template name="add">
+    <button name="add" class="add">Add Tasks</button>
 </template>
