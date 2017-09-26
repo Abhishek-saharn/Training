@@ -10,7 +10,7 @@ import {
 } from '../api/tasks.js';
 
 Template.update.onCreated(() => {
-    Meteor.subscribe('updatedName', FlowRouter.getParam('id'));
+    Meteor.subscribe('getUpdatedTask', FlowRouter.getParam('id'));
 })
 
 Template.update.helpers({

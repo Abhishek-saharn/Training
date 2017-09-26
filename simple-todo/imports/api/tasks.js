@@ -25,7 +25,7 @@ if (Meteor.isServer) {
         });
     });
 
-    Meteor.publish('updatedName', (id) => {
+    Meteor.publish('getUpdatedTask', (id) => {
         return Tasks.find({
             _id: id
         })
