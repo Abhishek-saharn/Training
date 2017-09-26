@@ -29,13 +29,8 @@ Template.taskq.events({
         Meteor.call('tasks.setPrivate', this._id, !this.private)
     },
     'click .text-span' () {
-        console.log(this.text);
-        console.log(this._id);
 
-        let currentURL = window.location.href;
-
-        let newUrl = currentURL+'/'+this._id;
-
-        window.location = newUrl;     
+        FlowRouter.go(`/${this._id}`);
+        
     }
 });

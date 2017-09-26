@@ -10,13 +10,14 @@ import {
 } from '../api/tasks.js';
 
 Template.update.onCreated(() => {
-    Meteor.subscribe('updatedName',FlowRouter.getParam('id'));
+    Meteor.subscribe('updatedName', FlowRouter.getParam('id'));
 })
 
 Template.update.helpers({
     taskName() {
-        console.log((Tasks))
-        return Tasks.text;
+        const newText = Tasks.find({_id: FlowRouter.getParam('id')})
+        // console.log((Tasks.find({_id: FlowRouter.getParam('id')}).fetch()[0].text))
+        return newText;
     }
 })
 
@@ -24,8 +25,8 @@ Template.update.events({
     'submit .new-task' (event) {
         const target = event.target;
         const text = target.text.value;
-
-        Meteor.call("tasks.update", text, FlowRouter.getParam('id'), function () {});
+        console.log("<<<<<<<<<>>>>>>>>>>", FlowRouter.getParam('id'));
+        Meteor.call("tasks.update", text, FlowRouter.getParam('id'));
 
     }
 })

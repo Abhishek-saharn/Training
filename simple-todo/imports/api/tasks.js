@@ -88,7 +88,6 @@ Meteor.methods({
         check(taskId, String);
 
         const task = Tasks.findOne(taskId);
-        // console.log(Meteor.user());
         if (task.owner !== Meteor.userId()) {
             throw new Meteor.Error('not Authorized');
         }

@@ -1,7 +1,7 @@
 <template name="update">
-    <h1>{{taskName}}</h1>
+    <h4>Task Name:</h4> <h1>{{#each taskName}}{{text}}{{/each}}</h1>
     <form class="new-task">
-          <Label>New Name:</Label>  <input type="text" name="text" value="{{taskName}}"  />
+          <Label>New Name:</Label>  <input type="text" name="text" value="{{#each taskName}}{{text}}{{/each}}"  />
         </form>
         <a href="/tasks/list"><button class="cancel">Cancel</button></a>
 </template>

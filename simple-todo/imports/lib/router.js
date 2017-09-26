@@ -4,6 +4,15 @@ FlowRouter.route('/', {
     }]
 })
 
+FlowRouter.route('/:id', {
+    action: (params, queryParams) => {
+
+        BlazeLayout.render('main', {
+            content: "update"
+        })
+    }
+})
+
 var taskRoutes = FlowRouter.group({
     prefix: '/tasks',
     name: 'tasks',
@@ -31,15 +40,5 @@ taskRoutes.route('/add', {
         })
 
         console.log("want to add..?", params);
-    }
-})
-taskRoutes.route('/list/:id', {
-    action: (params, queryParams) => {
-
-        BlazeLayout.render('main', {
-            content: "update"
-        })
-
-
     }
 })
