@@ -38,15 +38,18 @@ if (Meteor.isServer) {
 Meteor.methods({
     'tasks.insert' (text) {
         check(text, String);
-        if (!Meteor.userId()) {
-            throw new Meteor.Error("Not authorize");
+        if (!this.userId) {
+            // console.log('.................', this.userId)
+            return;
+            // throw new Meteor.Error("Not authorize");
 
         }
+        const user = Tasks.find(this.userId);
         Tasks.insert({
             text: text,
             createdAt: new Date(),
-            owner: Meteor.userId(),
-            username: Meteor.user().username,
+            owner: this.userId,
+            username: user.username,
         });
     },
     'tasks.remove' (taskId) {
@@ -56,15 +59,17 @@ Meteor.methods({
             _id: taskId
         });
 
-        if (task.private && task.owner != Meteor.userId()) {
-            throw new Meteor.Error('not-Auth');
+        if (task.private && task.owner !== this.userId) {
+            console.log('Here Throwing Error');
+
+        } else {
+            Tasks.remove(taskId);
         }
-        Tasks.remove(taskId);
     },
     'tasks.setChecked' (taskId, setChecked) {
         check(taskId, String);
         check(setChecked, Boolean);
-        Tasks.update(taskId, {
+        return Tasks.update(taskId, {
             $set: {
                 checked: setChecked
             },
@@ -74,24 +79,26 @@ Meteor.methods({
         check(taskId, String);
         check(setToPrivate, Boolean);
         const task = Tasks.findOne(taskId);
-        if (task.owner !== Meteor.userId()) {
-            throw new Meteor.Error('not-authorized');
+        if (task.owner !== this.userId) {
+            return false;
+            //            throw new Meteor.Error('not-authorized');
         }
-        Tasks.update(taskId, {
+        return Tasks.update(taskId, {
             $set: {
                 private: setToPrivate,
             }
         });
     },
-    'tasks.update' (newText, taskId) {
+    'tasks.update' (taskId, newText) {
         check(newText, String);
         check(taskId, String);
 
         const task = Tasks.findOne(taskId);
-        if (task.owner !== Meteor.userId()) {
-            throw new Meteor.Error('not Authorized');
+        if (task.owner !== this.userId) {
+            return 0;
+            // throw new Meteor.Error('not Authorized');
         }
-        (Tasks.update(taskId, {
+        return (Tasks.update(taskId, {
             $set: {
                 text: newText,
             }
