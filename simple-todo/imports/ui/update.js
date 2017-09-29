@@ -23,10 +23,11 @@ Template.update.helpers({
 
 Template.update.events({
     'submit .new-task' (event) {
+        event.preventDefault();
         const target = event.target;
         const text = target.text.value;
         console.log("<<<<<<<<<>>>>>>>>>>", FlowRouter.getParam('id'));
-        Meteor.call("tasks.update", text, FlowRouter.getParam('id'));
+        Meteor.call("tasks.update", FlowRouter.getParam('id'),text);
 
     }
 })
