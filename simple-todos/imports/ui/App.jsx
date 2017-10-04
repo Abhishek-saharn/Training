@@ -2,12 +2,14 @@ import Task from './Task';
 import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { Tasks } from '../api/tasks.js';
-import { createContainer } from 'meteor/react-meteor-data';
+import { withTracker, createContainer } from 'meteor/react-meteor-data';
+
+import { Switch, Route, withRouter } from 'react-router-dom';
 
 import { Meteor } from 'meteor/meteor';
 import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 
-
+import UpdateTask from '../ui/UpdateTask';
 class App extends React.Component {
 
   constructor(props) {
@@ -70,8 +72,10 @@ class App extends React.Component {
         </header>
 
         <ul>
-          {this.renderTasks()}
-
+          <Switch>
+            <Route exact path='/home' render={() => this.renderTasks()} />
+            <Route exact path='/:taskId' component={UpdateTask} />
+          </Switch>
         </ul>
       </div >
 
@@ -85,8 +89,8 @@ class App extends React.Component {
 //   currentUser: PropTypes.object,
 // }
 
-export default createContainer(() => {
-  Meteor.subscribe('tasks')
+const AppTracker = withTracker((props) => {
+  Meteor.subscribe('tasks');
   return {
 
     tasks: Tasks.find({}, { sort: { createdAt: -1 } }).fetch(),
@@ -95,5 +99,6 @@ export default createContainer(() => {
     }).count(),
     currentUser: Meteor.user(),
   };
-}, App);
+})(App);
 
+export default withRouter(AppTracker)

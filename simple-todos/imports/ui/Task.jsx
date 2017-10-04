@@ -1,13 +1,15 @@
 import React, { PropTypes } from 'react'
-
-
-import { Tasks } from '../api/tasks.js'
+import { withRouter, Route, Link } from 'react-router-dom';
 
 import { Meteor } from 'meteor/meteor'
-
 import classnames from 'classnames';
 
-export default class Task extends React.Component {
+
+import { Tasks } from '../api/tasks.js';
+
+// import UpdateTask from '../ui/UpdateTask'
+
+export class Task extends React.Component {
     // console.log(">>>>>>>>>>", props)
     constructor(props) {
         super(props);
@@ -38,9 +40,10 @@ export default class Task extends React.Component {
             private: this.props.task.private,
         });
 
-
+        const task_id = this.props.task._id;
 
         return (
+
             <li className={taskClassName}>
                 <button className="delete" onClick={this.deleteTask.bind(this)}>
                     &times;
@@ -54,13 +57,17 @@ export default class Task extends React.Component {
                         {this.props.task.private ? 'set Public' : 'set Private'}
                     </button>
                 ) : ''}
-                <span className="text">
-                    <strong>{this.props.task.username}</strong>: {this.props.task.text}
-                </span>
+                <Link to={`/${task_id}`} >
+                    <span className="text">
+                        <strong>{this.props.task.username}</strong>: {this.props.task.text}
+                    </span>
 
-
+                </Link>
             </li>
         );
     }
 
+
 }
+
+export default withRouter(Task);

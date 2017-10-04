@@ -14,6 +14,7 @@ export const Tasks = new Mongo.Collection('tasks')
 
 if (Meteor.isServer) {
     Meteor.publish('tasks', function tasksPublication() {
+        console.log('sakdhsdjlsjldfgdsl');
         return Tasks.find({
             $or: [{
                 private: {
@@ -24,6 +25,10 @@ if (Meteor.isServer) {
 
             }]
         });
+    });
+    Meteor.publish('publicTasks', function tasksPublication() {
+        console.log('sakdhsdjlsjldfgdsl');
+        return Tasks.find({ });
     });
 
 
