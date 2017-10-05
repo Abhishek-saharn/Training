@@ -25,7 +25,8 @@ export class Task extends React.Component {
     }
 
     deleteTask() {
-        Meteor.call('tasks.remove', this.props.task._id);
+        if (this.props.task.owner === this.props.currentUser)
+            Meteor.call('tasks.remove', this.props.task._id);
     }
 
 
@@ -45,24 +46,32 @@ export class Task extends React.Component {
         return (
 
             <li className={taskClassName}>
-                <button className="delete" onClick={this.deleteTask.bind(this)}>
-                    &times;
+                {this.props.task.owner === this.props.currentUser &&
+                    <button className="delete" onClick={this.deleteTask.bind(this)}>
+                        &times;
              </button>
+                }
                 <input
                     type="checkbox" readOnly checked={this.state.checked} onClick={this.toggleChecked.bind(this)}
                 />
-                {this.props.showPrivateButton ? (
+                {this.props.showPrivateButton && (
 
                     <button className="toggle-private" onClick={this.togglePrivate.bind(this)}>
                         {this.props.task.private ? 'set Public' : 'set Private'}
                     </button>
-                ) : ''}
-                <Link to={`/${task_id}`} >
+                )}
+                {this.props.task.owner === this.props.currentUser ?
+                    <Link to={`/${task_id}`} >
+                        <span className="text">
+                            <strong>{this.props.task.username}</strong>: {this.props.task.text}
+                        </span>
+
+                    </Link>
+                    :
                     <span className="text">
                         <strong>{this.props.task.username}</strong>: {this.props.task.text}
                     </span>
-
-                </Link>
+                }
             </li>
         );
     }

@@ -46,6 +46,7 @@ class App extends React.Component {
           key={task._id}
           task={task}
           showPrivateButton={showPrivateButton}
+          currentUser={currentUser}
         />
       );
     });
@@ -66,7 +67,9 @@ class App extends React.Component {
             Hide Completed Tasks
           </label>
           <AccountsUIWrapper />
-          {this.props.currentUser && (
+          {this.props.currentUser && this.props.location.pathname == "/home" && (
+
+
             <form onSubmit={this.handleSubmit.bind(this)}>
               <input
                 type="text"

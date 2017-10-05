@@ -1,7 +1,13 @@
-import { Mongo } from "meteor/mongo";
-import { Meteor } from "meteor/meteor";
+import {
+  Mongo
+} from "meteor/mongo";
+import {
+  Meteor
+} from "meteor/meteor";
 
-import { check } from "meteor/check";
+import {
+  check
+} from "meteor/check";
 // import Task from './Task';
 
 export const Tasks = new Mongo.Collection("tasks");
@@ -9,8 +15,7 @@ export const Tasks = new Mongo.Collection("tasks");
 if (Meteor.isServer) {
   Meteor.publish("tasks", function tasksPublication() {
     return Tasks.find({
-      $or: [
-        {
+      $or: [{
           private: {
             $ne: true
           }
@@ -27,7 +32,7 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-  "tasks.insert"(text) {
+  "tasks.insert" (text) {
     check(text, String);
     if (!this.userId) {
       throw new Error("Not auth");
@@ -40,16 +45,16 @@ Meteor.methods({
       username: Meteor.user().username
     });
   },
-  "tasks.remove"(taskId) {
+  "tasks.remove" (taskId) {
     check(taskId, String);
 
     const task = Tasks.findOne(taskId);
-    if (task.private && task.owner !== this.userId) {
+    if (task.owner !== this.userId) {
       throw new Meteor.Error("Not auth");
     }
     Tasks.remove(taskId);
   },
-  "tasks.setChecked"(taskId, setChecked) {
+  "tasks.setChecked" (taskId, setChecked) {
     check(taskId, String);
     check(setChecked, Boolean);
 
@@ -64,7 +69,7 @@ Meteor.methods({
       }
     });
   },
-  "tasks.setPrivate"(taskId, setToPrivate) {
+  "tasks.setPrivate" (taskId, setToPrivate) {
     check(taskId, String);
     check(setToPrivate, Boolean);
 
@@ -79,20 +84,22 @@ Meteor.methods({
       }
     });
   },
-  "tasks.update"(taskId, newTaskName) {
+  "tasks.update" (taskId, newTaskName) {
     check(taskId, String);
     check(newTaskName, String);
     const task = Tasks.findOne(taskId);
 
-    if (task.private && task.owner === this.userId) {
-      Tasks.update(
-        { _id: taskId },
-        {
-          $set: {
-            text: newTaskName
-          }
+    if (task.owner === this.userId) {
+      Tasks.update({
+        _id: taskId
+      }, {
+        $set: {
+          text: newTaskName
         }
-      );
+      });
+    } else {
+      console.log("NOT AUTH")
+
     }
   }
 });
