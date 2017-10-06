@@ -26,21 +26,22 @@ export default class App extends React.Component {
   handleUsername = (event) => {
 
     const { text } = event.nativeEvent;
-    const isValid =  /^[a-zA-Z0-9]+([_-]?[a-zA-Z0-9])*$/.test(text);
+    const isValid = /^[a-zA-Z0-9]+([_-]?[a-zA-Z0-9])*$/.test(text);
+
+    let valid = { ...this.state.valid }   //Changing states of nested fields check: https://stackoverflow.com/questions/43040721/react-setstate-for-nested-state
+    valid.username = isValid
+    this.setState({ valid });
 
 
-    this.setState({
-      active: {
-        username: true
-      },
-      formData: {
-        username: text
-      },
-      valid: {
-        username: isValid
-      }
+    let active = { ...this.state.active }
+    active.username = true
+    this.setState({ active });
 
-    })
+
+    let formData = { ...this.state.formData }
+    formData.username = text
+    this.setState({ formData });
+
   }
 
   handleEmail = (event) => {
@@ -50,43 +51,46 @@ export default class App extends React.Component {
     const isValid = emailRegEx.test(text);
 
 
-    this.setState({
-      active: {
-        email: true
-      },
-      formData: {
-        email: text
-      },
-      valid: {
-        email: isValid
-      }
+    let valid = { ...this.state.valid }
+    valid.email = isValid
+    this.setState({ valid });
 
-    })
+
+    let active = { ...this.state.active }
+    active.email = true
+    this.setState({ active });
+
+
+    let formData = { ...this.state.formData }
+    formData.email = text
+    this.setState({ formData });
+
+
+
   }
 
   handlePassword = (event) => {
 
     const { text } = event.nativeEvent;
     const passRegEx = /^(?=\S*[a-z])(?=\S*[A-Z])(?=\S*\d)(?=\S*[^\w\s])\S{8,}$/;
-    const isValid =  passRegEx.test(text);
-    
+    const isValid = passRegEx.test(text);
 
-    this.setState({
-      active: {
-        password: true
-      },
-      formData: {
-        password: text
-      },
-      valid: {
-        password: isValid
-      }
+    let valid = { ...this.state.valid }
+    valid.password = isValid
+    this.setState({ valid });
 
-    })
+
+    let active = { ...this.state.active }
+    active.password = true
+    this.setState({ active });
+
+
+    let formData = { ...this.state.formData }
+    formData.password = text
+    this.setState({ formData });
   }
 
   submitForm = () => {
-    console.log(this.state);
     const allValid = (this.state.valid.email) && (this.state.valid.password) && (this.state.valid.username);
     if (allValid)
       console.log(allValid);
